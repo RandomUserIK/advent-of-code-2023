@@ -19,16 +19,16 @@ fun String.toBag(): GameBag =
 		gameContents.let {
 			GameBag(
 				id = gameInfo.gameId(),
-				blue = it.getCountByColor(BLUE),
-				red = it.getCountByColor(RED),
-				green = it.getCountByColor(GREEN),
+				blue = it.getMaxByColor(BLUE),
+				red = it.getMaxByColor(RED),
+				green = it.getMaxByColor(GREEN),
 			)
 		}
 	}
 
 fun String.gameId(): Int = filter { it.isDigit() }.toInt()
 
-fun String.getCountByColor(color: String): Int =
+fun String.getMaxByColor(color: String): Int =
 	"\\d+ $color".toRegex().findAll(this).map { it.value.filter { c -> c.isDigit() }.toInt() }.max()
 
 fun main() {
